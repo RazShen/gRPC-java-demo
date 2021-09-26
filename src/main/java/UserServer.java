@@ -1,3 +1,4 @@
+import com.shopping.service.OrderServiceImpl;
 import com.shopping.service.UserServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -17,6 +18,7 @@ public class UserServer {
         try {
             server = ServerBuilder.forPort(port)
                     .addService(new UserServiceImpl())
+                    .addService(new OrderServiceImpl())
                     .build()
                     .start();
             logger.info("Server started on port 50051");
@@ -53,5 +55,6 @@ public class UserServer {
         UserServer userServer = new UserServer();
         userServer.startServer();
         userServer.blockUntilShutdown();
+
     }
 }
